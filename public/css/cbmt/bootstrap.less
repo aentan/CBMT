@@ -5,7 +5,7 @@
 // Reset and dependencies
 @import "normalize.less";
 @import "print.less";
-@import "glyphicons.less";
+// @import "glyphicons.less";
 
 // Core CSS
 @import "scaffolding.less";
@@ -29,7 +29,7 @@
 // @import "labels.less";
 // @import "badges.less";
 // @import "jumbotron.less";
-@import "thumbnails.less";
+// @import "thumbnails.less";
 // @import "alerts.less";
 // @import "progress-bars.less";
 // @import "media.less";
@@ -48,3 +48,23 @@
 // Utility classes
 @import "utilities.less";
 @import "responsive-utilities.less";
+
+
+#face-grid {
+  .clearfix();
+  width: 672px;
+  margin: 64px auto;
+  .face {
+    border-radius: @border-radius-base * 2;
+    float: left;
+    width: 160px;
+    height: 160px;
+    margin: 4px;
+    border: 1px solid @gray-lighter;
+    img {
+      border-radius: (@border-radius-base * 2) - 1px;
+      width: 158px;
+      height: 158px;
+    }
+  }
+}
