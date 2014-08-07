@@ -22,7 +22,7 @@ Array.prototype.shuffle = function() {
 
 function preload(images) {
   $(images).each(function(){
-    $('<img/>')[0].src = this;
+    $('<img/>')[0].src = "/public/img/faces/" + this + ".jpg";
   });
 }
 
@@ -51,16 +51,16 @@ preload(pos.concat(amb, pos));
 function make_faces_array() {
 
   // SHuffle them
+  pos.shuffle();
   neg.shuffle();
   amb.shuffle();
 
-  pos = pos[getRandomInt(1, 30)];
+  pos = pos.slice(0, 1);
   neg = neg.slice(0, 12);
   amb = amb.slice(0, 3);
 
   // Combine all into faces array
-  faces = neg.concat(amb);
-  faces.push(pos);
+  faces = neg.concat(amb, pos);
   faces.shuffle();
 }
 
