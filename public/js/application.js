@@ -20,30 +20,42 @@ Array.prototype.shuffle = function() {
   return this;
 }
 
+function preload(images) {
+  $(images).each(function(){
+    $('<img/>')[0].src = this;
+  });
+}
+
 // Make new faces
 
-var pos;
+var pos = [];
 var neg = [];
 var amb = [];
 var faces = [];
 
+// Construct array of positives then get 1 random positive
+for (i=0;i<30;i++) {
+  pos[i] = "pos_" + (i + 1);
+}
+// Construct array of 12 negatives
+for (i=0;i<83;i++) {
+  neg[i] = "neg_" + (i + 1);
+}
+// Construct array of 3 ambiguous
+for (i=0;i<13;i++) {
+  amb[i] = "amb_" + (i + 1);
+}
+
+preload(pos.concat(amb, pos));
+
 function make_faces_array() {
 
-  // Get 1 random positive
-  pos = "pos_" + getRandomInt(1, 30);
-
-  // Construct shuffled array of 12 negatives
-  for (i=0;i<83;i++) {
-    neg[i] = "neg_" + (i + 1);
-  }
+  // SHuffle them
   neg.shuffle();
-  neg = neg.slice(0, 12);
-
-  // Construct shuffled array of 3 ambiguous
-  for (i=0;i<13;i++) {
-    amb[i] = "amb_" + (i + 1);
-  }
   amb.shuffle();
+
+  pos = pos[getRandomInt(1, 30)];
+  neg = neg.slice(0, 12);
   amb = amb.slice(0, 3);
 
   // Combine all into faces array
@@ -52,7 +64,7 @@ function make_faces_array() {
   faces.shuffle();
 }
 
-$(function() {
+$(window).load(function() {
   
   function make_faces() {
     make_faces_array();
