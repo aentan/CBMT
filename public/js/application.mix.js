@@ -46,21 +46,23 @@ for (i=0;i<13;i++) {
   amb[i] = "amb_" + (i + 1);
 }
 
-preload(pos.concat(amb, pos));
+preload(pos.concat(amb, neg));
 
 function make_faces_array() {
 
-  // SHuffle them
+  // Shuffle them
   pos.shuffle();
   neg.shuffle();
   amb.shuffle();
 
-  pos = pos.slice(0, 1);
-  neg = neg.slice(0, 12);
-  amb = amb.slice(0, 3);
+  // Pick some
+  pos_faces = pos.slice(0, 1);
+  neg_faces = neg.slice(0, 12);
+  amb_faces = amb.slice(0, 3);
+  console.log(pos);
 
   // Combine all into faces array
-  faces = neg.concat(amb, pos);
+  faces = neg_faces.concat(amb_faces, pos_faces);
   faces.shuffle();
 }
 
@@ -69,7 +71,7 @@ $(window).load(function() {
   function make_faces() {
     make_faces_array();
     var face_grid = "";
-    for (i=0;i<16;i++) {
+    for (i=0;i<faces.length;i++) {
       face_grid += '<div class="face"><img src="/public/img/faces/' + faces[i] + '.jpg"></div>'
     }
     $('#face-grid').empty().append(face_grid);
